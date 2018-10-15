@@ -63,7 +63,6 @@ class BookController {
 
     return response.status(200).json(book)
 
-
   }
 
 

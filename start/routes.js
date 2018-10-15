@@ -20,9 +20,15 @@ const Route = use('Route');
 Route.get('/', () => {
   return { greeting: 'Hello world in JSON' }
 });
-
+//User Auth
 Route.group(()=>{
-  Route.get('books/','BookController.index');
+  Route.post('login','AuthController.login')
+}).prefix('api/v1');
+
+
+//Content [Book]
+Route.group(()=>{
+  Route.get('books/','BookController.index').middleware(['auth']);
   Route.get('books/:id','BookController.book');
   Route.put('books/:page','BookController.page');
   Route.post('store-book','BookController.store');
