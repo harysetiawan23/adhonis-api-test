@@ -5,16 +5,29 @@ const Book = use('App/Models/Book');
 class BookController {
 
 
-  async page({request,response}){
-    const {page} = request.all();
+  async index({response}){
+    const books = await Book.all();
 
-    if(!page){
+    return response.status(200).json(books)
+  }
+
+  async page({params,response}){
+
+    if(!params.page){
       const book = await Book.all();
       return response.status(200).json(book)
     }
-    const book = await Book.query().paginate(page,10);
+    const book = await Book.query().paginate(params.page,10);
     return response.status(200).json(book)
   }
+
+  async book({params,response}){
+    const book = await Book.find(params.id);
+    if(!book){
+      return response.status(200).json({status:404,data:book})
+    }
+  }
+
 
 
   async store({request,response}){

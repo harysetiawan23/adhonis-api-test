@@ -22,7 +22,9 @@ Route.get('/', () => {
 });
 
 Route.group(()=>{
-  Route.get('books','BookController.index');
+  Route.get('books/','BookController.index');
+  Route.get('books/:id','BookController.book');
+  Route.put('books/:page','BookController.page');
   Route.post('store-book','BookController.store');
   Route.put('update-book/:id','BookController.update');
   Route.delete('delete-book/:id','BookController.delete');
